@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏸 Badminton League Rulebook</title>
+<style>
+  :root {
+    --primary: #6C3CE1;
+    --primary-light: #8B5CF6;
+    --primary-dark: #4C1D95;
+    --accent: #F59E0B;
+    --accent-light: #FCD34D;
+    --bg: #0F0F1A;
+    --bg-card: #1A1A2E;
+    --bg-card-hover: #1F1F35;
+    --bg-detail: #16162A;
+    --text: #E8E8F0;
+    --text-muted: #9CA3AF;
+    --text-dim: #6B7280;
+    --border: #2D2D4A;
+    --success: #10B981;
+    --danger: #EF4444;
+    --info: #3B82F6;
+    --gradient-1: linear-gradient(135deg, #6C3CE1 0%, #3B82F6 100%);
+    --gradient-2: linear-gradient(135deg, #F59E0B 0%, #EF4444 100%);
+    --gradient-3: linear-gradient(135deg, #10B981 0%, #06B6D4 100%);
+    --radius: 16px;
+    --radius-sm: 10px;
+    --radius-xs: 6px;
+    --shadow: 0 4px 24px rgba(0,0,0,0.3);
+    --shadow-lg: 0 8px 40px rgba(0,0,0,0.4);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    position: relative;
+    padding: 3rem 1.5rem 2rem;
+    text-align: center;
+    background: linear-gradient(180deg, rgba(108,60,225,0.15) 0%, transparent 100%);
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60%; left: -30%;
+    width: 160%; height: 160%;
+    background: radial-gradient(ellipse at center, rgba(108,60,225,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-shuttle {
+    font-size: 3.5rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    animation: float 3s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  .hero h1 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-top: 0.4rem;
+  }
+
+  /* ── Quick Glance Strip ── */
+  .quick-strip {
+    display: flex;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .quick-strip::-webkit-scrollbar { display: none; }
+  .quick-chip {
+    flex-shrink: 0;
+    scroll-snap-align: start;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+    color: var(--text);
+  }
+  .quick-chip .chip-icon {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+  }
+  .chip-purple .chip-icon { background: rgba(108,60,225,0.2); color: var(--primary-light); }
+  .chip-amber .chip-icon  { background: rgba(245,158,11,0.2); color: var(--accent); }
+  .chip-green .chip-icon  { background: rgba(16,185,129,0.2); color: var(--success); }
+  .chip-blue .chip-icon   { background: rgba(59,130,246,0.2); color: var(--info); }
+
+  /* ── TOC ── */
+  .toc {
+    padding: 0 1.5rem 1rem;
+  }
+  .toc-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+  }
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+  }
+  .toc-btn {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.6rem 0.4rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    color: var(--text);
+  }
+  .toc-btn:hover, .toc-btn:active {
+    background: var(--bg-card-hover);
+    border-color: var(--primary);
+    transform: translateY(-1px);
+  }
+  .toc-num {
+    font-size: 0.65rem;
+    color: var(--primary-light);
+    font-weight: 700;
+    display: block;
+  }
+  .toc-title {
+    font-size: 0.7rem;
+    font-weight: 600;
+    display: block;
+    margin-top: 0.15rem;
+  }
+
+  /* ── Container ── */
+  .container {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 1rem 4rem;
+  }
+
+  /* ── Section ── */
+  .section {
+    margin-bottom: 1.5rem;
+    scroll-margin-top: 1rem;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    padding-top: 1.5rem;
+  }
+  .section-icon {
+    width: 42px; height: 42px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+  .section-number {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+  }
+  .section-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+
+  /* ── Card ── */
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    margin-bottom: 0.75rem;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: rgba(108,60,225,0.3); }
+
+  /* ── Rule Item ── */
+  .rule-item {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    padding: 0.6rem 0;
+  }
+  .rule-item + .rule-item {
+    border-top: 1px solid rgba(45,45,74,0.5);
+  }
+  .rule-icon {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+    background: rgba(108,60,225,0.1);
+  }
+  .rule-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--primary-light);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .rule-text {
+    font-size: 0.9rem;
+    color: var(--text);
+    margin-top: 0.15rem;
+  }
+
+  /* ── Visual Match Format ── */
+  .match-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 1rem 0;
+    flex-wrap: wrap;
+  }
+  .game-block {
+    background: var(--bg-detail);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.75rem 1rem;
+    text-align: center;
+    min-width: 80px;
+    transition: transform 0.2s;
+  }
+  .game-block:hover { transform: scale(1.04); }
+  .game-block .g-num {
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  .game-block .g-type {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-top: 0.2rem;
+  }
+  .game-block .g-icon { font-size: 1.3rem; }
+  .game-arrow {
+    font-size: 1rem;
+    color: var(--text-dim);
+  }
+  .singles-block { border-color: var(--primary); }
+  .singles-block .g-type { color: var(--primary-light); }
+  .doubles-block { border-color: var(--accent); }
+  .doubles-block .g-type { color: var(--accent); }
+
+  /* ── Players Visual ── */
+  .players-strip {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 0;
+  }
+  .player-dot {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border: 2px solid var(--border);
+    background: var(--bg-detail);
+    transition: all 0.2s;
+  }
+  .player-dot.active {
+    border-color: var(--primary-light);
+    background: rgba(108,60,225,0.2);
+    color: var(--primary-light);
+  }
+  .player-dot.done {
+    border-color: var(--success);
+    background: rgba(16,185,129,0.15);
+    color: var(--success);
+  }
+  .player-dot.waiting {
+    border-color: var(--text-dim);
+    color: var(--text-dim);
+  }
+
+  /* ── Scoreboard Visual ── */
+  .scoreboard {
+    background: var(--bg-detail);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    margin: 0.75rem 0;
+  }
+  .score-row {
+    display: grid;
+    grid-template-columns: 1fr auto auto auto;
+    align-items: center;
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+    gap: 1rem;
+  }
+  .score-row + .score-row { border-top: 1px solid var(--border); }
+  .score-row.header {
+    background: rgba(108,60,225,0.08);
+    font-weight: 700;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+  }
+  .score-row .game-name { font-weight: 600; }
+  .score-badge {
+    padding: 0.2rem 0.6rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+  .badge-start { background: rgba(59,130,246,0.15); color: var(--info); }
+  .badge-end   { background: rgba(16,185,129,0.15); color: var(--success); }
+  .badge-type  { background: rgba(108,60,225,0.15); color: var(--primary-light); }
+
+  /* ── Safety Cap Visual ── */
+  .cap-example {
+    background: var(--bg-detail);
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+    margin: 0.75rem 0;
+    border-left: 3px solid var(--accent);
+  }
+  .cap-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+  .cap-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .cap-score {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xs);
+    padding: 0.5rem 0.75rem;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1rem;
+  }
+  .cap-score small {
+    display: block;
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.2rem;
+  }
+  .cap-score .team-a { color: var(--info); }
+  .cap-score .team-b { color: var(--danger); }
+  .cap-arrow-big {
+    font-size: 1.3rem;
+    color: var(--accent);
+  }
+  .cap-adjusted {
+    color: var(--success);
+    position: relative;
+  }
+
+  /* ── Detail / Expand Button ── */
+  .detail-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(108,60,225,0.1);
+    border: 1px solid rgba(108,60,225,0.25);
+    border-radius: 50px;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--primary-light);
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 0.5rem;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+  .detail-toggle:hover, .detail-toggle:active {
+    background: rgba(108,60,225,0.2);
+    border-color: var(--primary-light);
+  }
+  .detail-toggle .arrow {
+    transition: transform 0.3s;
+    font-size: 0.7rem;
+  }
+  .detail-toggle.open .arrow {
+    transform: rotate(180deg);
+  }
+
+  .detail-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s ease;
+    opacity: 0;
+    padding: 0 0;
+  }
+  .detail-content.open {
+    opacity: 1;
+    padding: 0.75rem 0 0;
+  }
+  .detail-box {
+    background: var(--bg-detail);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+  .detail-box strong { color: var(--text); }
+  .detail-box em { color: var(--accent); font-style: normal; font-weight: 600; }
+  .detail-box ul { padding-left: 1.2rem; margin: 0.5rem 0; }
+  .detail-box li { margin: 0.3rem 0; }
+
+  /* ── Tie-Break Ladder ── */
+  .ladder {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 0.75rem 0;
+  }
+  .ladder-step {
+    display: flex;
+    align-items: stretch;
+    min-height: 52px;
+  }
+  .ladder-line {
+    width: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .ladder-circle {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 800;
+    flex-shrink: 0;
+    border: 2px solid;
+  }
+  .ladder-connector {
+    width: 2px;
+    flex: 1;
+    background: var(--border);
+  }
+  .ladder-step:last-child .ladder-connector { display: none; }
+  .ladder-body {
+    padding: 0.25rem 0 1rem 0.5rem;
+    flex: 1;
+  }
+  .ladder-title {
+    font-weight: 700;
+    font-size: 0.88rem;
+  }
+  .ladder-desc {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 0.1rem;
+  }
+  .step-1 .ladder-circle { border-color: var(--accent); color: var(--accent); background: rgba(245,158,11,0.1); }
+  .step-2 .ladder-circle { border-color: var(--primary-light); color: var(--primary-light); background: rgba(108,60,225,0.1); }
+  .step-3 .ladder-circle { border-color: var(--info); color: var(--info); background: rgba(59,130,246,0.1); }
+  .step-4 .ladder-circle { border-color: var(--text-dim); color: var(--text-dim); background: rgba(107,114,128,0.1); }
+
+  /* ── Callout ── */
+  .callout {
+    border-radius: var(--radius-sm);
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    margin: 0.75rem 0;
+  }
+  .callout-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.05rem; }
+  .callout-info {
+    background: rgba(59,130,246,0.08);
+    border: 1px solid rgba(59,130,246,0.2);
+    color: var(--info);
+  }
+  .callout-warn {
+    background: rgba(245,158,11,0.08);
+    border: 1px solid rgba(245,158,11,0.2);
+    color: var(--accent);
+  }
+  .callout-danger {
+    background: rgba(239,68,68,0.08);
+    border: 1px solid rgba(239,68,68,0.2);
+    color: var(--danger);
+  }
+
+  /* ── Rotation Visual ── */
+  .rotation-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.4rem;
+    margin: 0.75rem 0;
+    text-align: center;
+    font-size: 0.72rem;
+  }
+  .rotation-grid .rg-header {
+    font-weight: 700;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding-bottom: 0.3rem;
+    font-size: 0.62rem;
+  }
+  .rotation-cell {
+    background: var(--bg-detail);
+    border-radius: var(--radius-xs);
+    padding: 0.4rem 0.2rem;
+    border: 1px solid var(--border);
+    font-weight: 600;
+  }
+  .rotation-cell.singles {
+    background: rgba(108,60,225,0.12);
+    border-color: var(--primary);
+    color: var(--primary-light);
+  }
+  .rotation-cell.doubles {
+    background: rgba(245,158,11,0.08);
+    border-color: rgba(245,158,11,0.25);
+    color: var(--accent);
+  }
+
+  /* ── Back to Top ── */
+  .back-top {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s;
+    pointer-events: none;
+    z-index: 100;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .back-top.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    border-top: 1px solid var(--border);
+    margin-top: 1rem;
+  }
+
+  /* ── Responsive ── */
+  @media (min-width: 600px) {
+    .hero h1 { font-size: 2.2rem; }
+    .toc-grid { grid-template-columns: repeat(6, 1fr); }
+    .container { padding: 0 2rem 4rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════ HERO ═══════ -->
+<div class="hero">
+  <div class="hero-shuttle">🏸</div>
+  <h1>Official Badminton League Rulebook</h1>
+  <p>Everything you need to know — tap any section to dig deeper</p>
+</div>
+
+<!-- ═══════ QUICK GLANCE ═══════ -->
+<div class="quick-strip">
+  <div class="quick-chip chip-purple"><span class="chip-icon">5</span> Players/Team</div>
+  <div class="quick-chip chip-amber"><span class="chip-icon">3</span> Games/Match</div>
+  <div class="quick-chip chip-green"><span class="chip-icon">45</span> Target Score</div>
+  <div class="quick-chip chip-blue"><span class="chip-icon">10</span> Safety Cap</div>
+</div>
+
+<!-- ═══════ TOC ═══════ -->
+<div class="toc">
+  <div class="toc-label">Jump to Section</div>
+  <div class="toc-grid">
+    <a class="toc-btn" href="#sec-team"><span class="toc-num">I</span><span class="toc-title">Team</span></a>
+    <a class="toc-btn" href="#sec-rotation"><span class="toc-num">II</span><span class="toc-title">Rotation</span></a>
+    <a class="toc-btn" href="#sec-scoring"><span class="toc-num">III</span><span class="toc-title">Scoring</span></a>
+    <a class="toc-btn" href="#sec-conduct"><span class="toc-num">IV</span><span class="toc-title">Conduct</span></a>
+    <a class="toc-btn" href="#sec-standings"><span class="toc-num">V</span><span class="toc-title">Standings</span></a>
+    <a class="toc-btn" href="#sec-injury"><span class="toc-num">VI</span><span class="toc-title">Injury</span></a>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══════ I. TEAM ═══════ -->
+<div class="section" id="sec-team">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(108,60,225,0.12);">👥</div>
+    <div>
+      <div class="section-number">Section I</div>
+      <div class="section-title">Team & Player Participation</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="rule-item">
+      <div class="rule-icon">🎯</div>
+      <div>
+        <div class="rule-label">Squad Size</div>
+        <div class="rule-text">5 members per team — no more, no less.</div>
+      </div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-icon">✅</div>
+      <div>
+        <div class="rule-label">Match Duty</div>
+        <div class="rule-text">Every match, <strong>all 5 members must play</strong>.</div>
+      </div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-icon">📋</div>
+      <div>
+        <div class="rule-label">Game Assignment</div>
+        <div class="rule-text">Every member plays <strong>exactly one game</strong> per match.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Match Format Visual -->
+  <div class="card">
+    <div class="rule-label" style="margin-bottom:0.5rem;">Match Format</div>
+    <div class="match-visual">
+      <div class="game-block singles-block">
+        <div class="g-num">Game 1</div>
+        <div class="g-icon">🧑</div>
+        <div class="g-type">Singles</div>
+      </div>
+      <div class="game-arrow">→</div>
+      <div class="game-block doubles-block">
+        <div class="g-num">Game 2</div>
+        <div class="g-icon">👫</div>
+        <div class="g-type">Doubles</div>
+      </div>
+      <div class="game-arrow">→</div>
+      <div class="game-block doubles-block">
+        <div class="g-num">Game 3</div>
+        <div class="g-icon">👫</div>
+        <div class="g-type">Doubles</div>
+      </div>
+    </div>
+
+    <button class="detail-toggle" onclick="toggleDetail(this)">
+      How are 5 players split across 3 games? <span class="arrow">▼</span>
+    </button>
+    <div class="detail-content">
+      <div class="detail-box">
+        <strong>1 Singles</strong> = 1 player per team.<br>
+        <strong>2 Doubles</strong> = 2 players per team per game = 4 total.<br><br>
+        That's <em>1 + 2 + 2 = 5 players</em>, so everyone plays exactly once!
+        <div class="players-strip" style="margin-top:0.75rem;">
+          <div class="player-dot active" title="Singles">P1</div>
+          <div class="player-dot done" title="Doubles 1">P2</div>
+          <div class="player-dot done" title="Doubles 1">P3</div>
+          <div class="player-dot waiting" title="Doubles 2">P4</div>
+          <div class="player-dot waiting" title="Doubles 2">P5</div>
+        </div>
+        <div style="text-align:center; font-size:0.75rem; color:var(--text-dim);">
+          🟣 Singles &nbsp; 🟢 Doubles 1 &nbsp; ⚪ Doubles 2
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ II. ROTATION ═══════ -->
+<div class="section" id="sec-rotation">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(245,158,11,0.12);">🔄</div>
+    <div>
+      <div class="section-number">Section II</div>
+      <div class="section-title">The "Singles Pentathlon" Rotation</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="rule-item">
+      <div class="rule-icon" style="background:rgba(245,158,11,0.12);">⭐</div>
+      <div>
+        <div class="rule-label">The Rule</div>
+        <div class="rule-text">Over the 5 potential matches (3 Group Stage + 1 Semi + 1 Final), every member is <strong>scheduled to play exactly one Singles game</strong>.</div>
+      </div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-icon" style="background:rgba(16,185,129,0.12);">🔒</div>
+      <div>
+        <div class="rule-label">Eligibility</div>
+        <div class="rule-text">Once you've done your Singles, you're <strong>"Doubles Only"</strong> for the rest of the tournament.</div>
+      </div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-icon" style="background:rgba(239,68,68,0.12);">🎲</div>
+      <div>
+        <div class="rule-label">Luck of the Draw</div>
+        <div class="rule-text">Eliminated before all members get their turn? Those scheduled for later Singles simply won't get theirs.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <button class="detail-toggle" onclick="toggleDetail(this)" style="margin-top:0;">
+      See a full rotation example <span class="arrow">▼</span>
+    </button>
+    <div class="detail-content">
+      <div class="detail-box">
+        <strong>Example — Team "Smashers"</strong><br>
+        Members: Alice, Bob, Charlie, Dana, Eve
+        <div class="rotation-grid" style="margin-top:0.75rem;">
+          <div class="rg-header">M1</div>
+          <div class="rg-header">M2</div>
+          <div class="rg-header">M3</div>
+          <div class="rg-header">Semi</div>
+          <div class="rg-header">Final</div>
+
+          <div class="rotation-cell singles">Alice 🧑</div>
+          <div class="rotation-cell singles">Bob 🧑</div>
+          <div class="rotation-cell singles">Charlie 🧑</div>
+          <div class="rotation-cell singles">Dana 🧑</div>
+          <div class="rotation-cell singles">Eve 🧑</div>
+        </div>
+        <div style="margin-top:0.6rem; font-size:0.82rem;">
+          ✅ Each person plays Singles exactly <em>once</em>.<br>
+          ⚠️ If Smashers lose in the Semis, <strong>Eve never plays Singles</strong> — that's the luck of the draw!
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ III. SCORING ═══════ -->
+<div class="section" id="sec-scoring">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(16,185,129,0.12);">📊</div>
+    <div>
+      <div class="section-number">Section III</div>
+      <div class="section-title">Relay Scoring & The "Safety Cap"</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="callout callout-info">
+      <span class="callout-icon">💡</span>
+      <span>This league uses <strong>Continuous Relay</strong> scoring — points carry over between games. Think of it as one big race to 45!</span>
+    </div>
+
+    <div class="rule-item" style="padding-top:0.25rem;">
+      <div class="rule-icon" style="background:rgba(16,185,129,0.12);">🎯</div>
+      <div>
+        <div class="rule-label">Target Score</div>
+        <div class="rule-text">The match ends when a team reaches <strong>45 points</strong>.</div>
+      </div>
+    </div>
+
+    <div class="rule-label" style="margin:0.75rem 0 0.5rem;">Game Transitions</div>
+    <div class="scoreboard">
+      <div class="score-row header">
+        <span>Game</span>
+        <span>Start</span>
+        <span>Target</span>
+        <span>Type</span>
+      </div>
+      <div class="score-row">
+        <span class="game-name">Game 1</span>
+        <span class="score-badge badge-start">0 – 0</span>
+        <span class="score-badge badge-end">15</span>
+        <span class="score-badge badge-type">Singles</span>
+      </div>
+      <div class="score-row">
+        <span class="game-name">Game 2</span>
+        <span class="score-badge badge-start">prev.</span>
+        <span class="score-badge badge-end">30</span>
+        <span class="score-badge badge-type">Doubles</span>
+      </div>
+      <div class="score-row">
+        <span class="game-name">Game 3</span>
+        <span class="score-badge badge-start">prev.</span>
+        <span class="score-badge badge-end">45</span>
+        <span class="score-badge badge-type">Doubles</span>
+      </div>
+    </div>
+
+    <button class="detail-toggle" onclick="toggleDetail(this)">
+      Walk me through a full example <span class="arrow">▼</span>
+    </button>
+    <div class="detail-content">
+      <div class="detail-box">
+        <strong>Scenario — no cap triggered</strong>
+        <ul>
+          <li><strong>Game 1:</strong> Team A leads, score reaches <em>15 – 10</em>. Game 1 over.</li>
+          <li><strong>Game 2:</strong> Starts at 15 – 10. New doubles pairs swap in. Play continues until a team hits 30. Score ends <em>28 – 30</em>. Game 2 over.</li>
+          <li><strong>Game 3:</strong> Starts at 28 – 30. Final doubles pairs. First to 45 wins the match!</li>
+        </ul>
+        The match is <strong>one continuous score</strong> — no resets between games.
+      </div>
+    </div>
+  </div>
+
+  <!-- Safety Cap -->
+  <div class="card">
+    <div class="rule-item" style="padding-top:0;">
+      <div class="rule-icon" style="background:rgba(245,158,11,0.12);">🛡️</div>
+      <div>
+        <div class="rule-label">The 10-Point Safety Cap</div>
+        <div class="rule-text">If a game ends with a lead <strong>greater than 10</strong>, the trailing team's score is adjusted so no one starts more than 10 behind.</div>
+      </div>
+    </div>
+
+    <div class="cap-example">
+      <div class="cap-label">Example</div>
+      <div class="cap-flow">
+        <div class="cap-score">
+          <small>Game 1 Ends</small>
+          <span class="team-a">15</span> – <span class="team-b">2</span>
+        </div>
+        <div class="cap-arrow-big">→</div>
+        <div class="cap-score">
+          <small>Game 2 Starts</small>
+          <span class="team-a">15</span> – <span class="cap-adjusted">5 ✓</span>
+        </div>
+      </div>
+      <div style="text-align:center; margin-top:0.5rem; font-size:0.78rem; color:var(--text-muted);">
+        Trail was 13 pts (>10) → adjusted to max 10-pt deficit
+      </div>
+    </div>
+
+    <button class="detail-toggle" onclick="toggleDetail(this)">
+      More cap scenarios <span class="arrow">▼</span>
+    </button>
+    <div class="detail-content">
+      <div class="detail-box">
+        <strong>When does the cap kick in?</strong><br>
+        Only when the gap is <em>greater than 10</em>.
+        <ul>
+          <li><strong>15 – 5:</strong> Gap is 10 → ❌ No cap. Game 2 starts 15 – 5.</li>
+          <li><strong>15 – 4:</strong> Gap is 11 → ✅ Cap! Game 2 starts 15 – 5.</li>
+          <li><strong>15 – 0:</strong> Gap is 15 → ✅ Cap! Game 2 starts 15 – 5.</li>
+          <li><strong>30 – 16:</strong> Gap is 14 → ✅ Cap! Game 3 starts 30 – 20.</li>
+          <li><strong>30 – 22:</strong> Gap is 8 → ❌ No cap. Game 3 starts 30 – 22.</li>
+        </ul>
+        <strong>Formula:</strong> If (leader – trailer) > 10, set trailer = leader – 10.
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="rule-item" style="padding-top:0;">
+      <div class="rule-icon" style="background:rgba(59,130,246,0.12);">⚡</div>
+      <div>
+        <div class="rule-label">No Deuce</div>
+        <div class="rule-text">First team to the target point wins the segment. No need for a 2-point lead.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ IV. CONDUCT ═══════ -->
+<div class="section" id="sec-conduct">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(59,130,246,0.12);">📝</div>
+    <div>
+      <div class="section-number">Section IV</div>
+      <div class="section-title">Match Conduct</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="rule-item">
+      <div class="rule-icon" style="background:rgba(59,130,246,0.12);">🕐</div>
+      <div>
+        <div class="rule-label">Lineup Submission</div>
+        <div class="rule-text">Captains get <strong>5 minutes</strong> before each match to submit their player sequence to the organizer.</div>
+      </div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-icon" style="background:rgba(59,130,246,0.12);">🪶</div>
+      <div>
+        <div class="rule-label">The Toss</div>
+        <div class="rule-text">A <strong>shuttle toss</strong> determines Serve or Side at the start of the match.</div>
+      </div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-icon" style="background:rgba(59,130,246,0.12);">↔️</div>
+      <div>
+        <div class="rule-label">Side Switching</div>
+        <div class="rule-text">Teams switch sides <strong>once per match</strong> — after Game 2 ends (when a team hits 30), before Game 3 begins.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <button class="detail-toggle" onclick="toggleDetail(this)" style="margin-top:0;">
+      Wait, when exactly do we switch? <span class="arrow">▼</span>
+    </button>
+    <div class="detail-content">
+      <div class="detail-box">
+        <strong>Side switch happens after Game 2 ends</strong> (i.e., when the leading team reaches 30 points).<br><br>
+        <ul>
+          <li><strong>Game 1 (Singles):</strong> Play on initial sides.</li>
+          <li><strong>Game 2 (Doubles):</strong> Same sides still.</li>
+          <li>🔄 <strong>Switch sides now!</strong></li>
+          <li><strong>Game 3 (Doubles):</strong> Play on swapped sides.</li>
+        </ul>
+        This ensures fairness if there's a wind or lighting advantage on one side.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ V. STANDINGS ═══════ -->
+<div class="section" id="sec-standings">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(245,158,11,0.12);">🏆</div>
+    <div>
+      <div class="section-number">Section V</div>
+      <div class="section-title">Standings & Tie-Breaking</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="callout callout-info">
+      <span class="callout-icon">📈</span>
+      <span>Ranking uses <strong>Total Cumulative Points</strong> scored across all group stage matches — <strong>not match wins</strong>. If teams are tied, the following tiebreakers apply in order:</span>
+    </div>
+
+    <div class="callout callout-info" style="border-color:rgba(16,185,129,0.3); background:rgba(16,185,129,0.06); color:var(--success);">
+      <span class="callout-icon">💡</span>
+      <span>Every point matters! A team that loses 44–45 keeps those 44 points. Consistent, competitive play is rewarded even in a loss.</span>
+    </div>
+
+    <div class="callout callout-warn">
+      <span class="callout-icon">✅</span>
+      <span><strong>2-team tie?</strong> Head-to-Head always settles it — every match has a winner (first to 45, no draws). &nbsp;<strong>3+ teams?</strong> A mini-league is formed (see below).</span>
+    </div>
+
+    <div class="ladder">
+      <div class="ladder-step step-1">
+        <div class="ladder-line">
+          <div class="ladder-circle">1</div>
+          <div class="ladder-connector"></div>
+        </div>
+        <div class="ladder-body">
+          <div class="ladder-title">Head-to-Head</div>
+          <div class="ladder-desc">Winner of the direct match between tied teams.</div>
+        </div>
+      </div>
+      <div class="ladder-step step-2">
+        <div class="ladder-line">
+          <div class="ladder-circle">2</div>
+          <div class="ladder-connector"></div>
+        </div>
+        <div class="ladder-body">
+          <div class="ladder-title">Total Games Won</div>
+          <div class="ladder-desc">Most individual game wins (out of 9 in group stages).</div>
+        </div>
+      </div>
+      <div class="ladder-step step-3">
+        <div class="ladder-line">
+          <div class="ladder-circle">3</div>
+          <div class="ladder-connector"></div>
+        </div>
+        <div class="ladder-body">
+          <div class="ladder-title">Point Differential</div>
+          <div class="ladder-desc">Points scored minus points conceded.</div>
+        </div>
+      </div>
+      <div class="ladder-step step-4">
+        <div class="ladder-line">
+          <div class="ladder-circle">4</div>
+          <div class="ladder-connector"></div>
+        </div>
+        <div class="ladder-body">
+          <div class="ladder-title">Natural Sequence</div>
+          <div class="ladder-desc">Original registration/starting order.</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="detail-toggle" onclick="toggleDetail(this)">
+      2-team tie example <span class="arrow">▼</span>
+    </button>
+    <div class="detail-content">
+      <div class="detail-box">
+        <strong>Scenario:</strong> Teams A and B both end group stage with 120 cumulative points.<br><br>
+        <strong>Step 1 — Head-to-Head:</strong> A beat B 45–38 in their direct match → <em>Team A ranks higher</em>. Done!<br><br>
+        Since every match produces a winner (first to 45, no draws possible), head-to-head <strong>always</strong> resolves a 2-team tie. Tiebreakers 2–4 are never needed here.
+      </div>
+    </div>
+
+    <button class="detail-toggle" onclick="toggleDetail(this)">
+      3+ team tie — the Mini-League <span class="arrow">▼</span>
+    </button>
+    <div class="detail-content">
+      <div class="detail-box">
+        <strong>How it works:</strong> When 3 or more teams are tied, form a <em>mini-league</em> using only the results among those tied teams. Then apply the tiebreaker cascade within this mini-league:<br><br>
+        <strong>Example:</strong> Teams A, B, and C all tied on cumulative points. In their head-to-head matches: A beat B, B beat C, C beat A (circular!).<br><br>
+        <ul>
+          <li><strong>Step 1 — H2H (mini-league):</strong> Each team is 1-1 → tied → move on.</li>
+          <li><strong>Step 2 — Games Won (mini-league):</strong> Count game segment wins only from A vs B, B vs C, and A vs C. If A won 4, B won 3, C won 2 → <em>A ranks 1st, B 2nd, C 3rd</em>.</li>
+          <li><strong>Step 3 — Point Differential (mini-league):</strong> Net points from those matches only.</li>
+          <li><strong>Step 4 — Natural Sequence:</strong> Registration order — always unique, always resolves.</li>
+        </ul>
+        <div class="callout callout-info" style="margin-top:0.5rem;">
+          <span class="callout-icon">💡</span>
+          <span>If any step partially resolves the tie (e.g., separates 1 team from a 3-way tie), the remaining tied teams <strong>restart from Step 1</strong> as a smaller group.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ VI. INJURY ═══════ -->
+<div class="section" id="sec-injury">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(239,68,68,0.12);">🏥</div>
+    <div>
+      <div class="section-number">Section VI</div>
+      <div class="section-title">Injury & Sickness Protocol</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="callout callout-warn">
+      <span class="callout-icon">⚠️</span>
+      <span>If a member can't play, the team still competes — remaining members cover extra games as needed.</span>
+    </div>
+
+    <div class="rule-item">
+      <div class="rule-icon" style="background:rgba(239,68,68,0.12);">🔀</div>
+      <div>
+        <div class="rule-label">Substitution</div>
+        <div class="rule-text">A substitute is chosen from the remaining members. That person covers the gap by <strong>playing two games</strong> in that match.</div>
+      </div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-icon" style="background:rgba(239,68,68,0.12);">⚡</div>
+      <div>
+        <div class="rule-label">Singles Impact</div>
+        <div class="rule-text">If the absent player was scheduled for Singles, the substitute's appearance <strong>counts as the substitute's Singles turn</strong> for the tournament.</div>
+      </div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-icon" style="background:rgba(239,68,68,0.12);">📉</div>
+      <div>
+        <div class="rule-label">Minimum Roster</div>
+        <div class="rule-text"><strong>3 players minimum</strong> to compete. Fewer than 3 available = match forfeit (can't field a Doubles pair).</div>
+      </div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-icon" style="background:rgba(59,130,246,0.12);">🛡️</div>
+      <div>
+        <div class="rule-label">Singles Exception</div>
+        <div class="rule-text">If all remaining members have completed their Singles turn, an <strong>emergency exception</strong> is granted — any available member can play Singles without it counting as a second turn.</div>
+      </div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-icon" style="background:rgba(16,185,129,0.12);">💚</div>
+      <div>
+        <div class="rule-label">Recovery</div>
+        <div class="rule-text">If the injured player recovers later, they should fulfill their Singles turn at the <strong>next available opportunity</strong> (best-effort, coordinated with the organizer).</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <button class="detail-toggle" onclick="toggleDetail(this)" style="margin-top:0;">
+      Example injury scenario <span class="arrow">▼</span>
+    </button>
+    <div class="detail-content">
+      <div class="detail-box">
+        <strong>Scenario:</strong> It's Match 2 and Dana is injured. Dana was scheduled for Singles this match.
+        <ul>
+          <li>The captain picks <strong>Bob</strong> to cover.</li>
+          <li>Bob plays <strong>Singles (Game 1)</strong> and one of the <strong>Doubles games</strong>.</li>
+          <li>This Singles game now counts as <strong>Bob's Singles turn</strong> for the tournament.</li>
+          <li>Dana should fulfill her Singles turn in a later match if the team advances <em>and</em> she recovers (best-effort).</li>
+        </ul>
+        <div class="callout callout-danger" style="margin-top:0.5rem;">
+          <span class="callout-icon">🚨</span>
+          <span>If Bob had already played his Singles in Match 1, another eligible member must sub instead — you <strong>can't play Singles twice</strong> (unless all 4 remaining have already gone, in which case an emergency exception applies).</span>
+        </div>
+        <div class="callout callout-warn" style="margin-top:0.5rem;">
+          <span class="callout-icon">📉</span>
+          <span><strong>Multiple absences?</strong> The same principle cascades. But if you're down to fewer than 3 players, the team <strong>forfeits</strong> — you can't field a Doubles pair.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<!-- ═══════ FOOTER ═══════ -->
+<div class="footer">
+  🏸 Official Badminton League Rulebook &nbsp;·&nbsp; 2026 Season
+</div>
+
+<!-- ═══════ BACK TO TOP ═══════ -->
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- ═══════ JS ═══════ -->
+<script>
+  // Toggle detail sections
+  function toggleDetail(btn) {
+    const content = btn.nextElementSibling;
+    const isOpen = content.classList.contains('open');
+
+    if (isOpen) {
+      content.style.maxHeight = '0';
+      content.classList.remove('open');
+      btn.classList.remove('open');
+    } else {
+      content.classList.add('open');
+      btn.classList.add('open');
+      content.style.maxHeight = content.scrollHeight + 'px';
+    }
+  }
+
+  // Back to top button
+  const backBtn = document.getElementById('backTop');
+  window.addEventListener('scroll', () => {
+    backBtn.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+
+  // Smooth scroll for TOC links
+  document.querySelectorAll('.toc-btn').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
+</body>
+</html>
